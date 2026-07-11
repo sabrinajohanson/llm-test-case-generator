@@ -1,0 +1,155 @@
+{
+  "test_cases": [
+    {
+      "id": "TC-001",
+      "title": "Successful Login with Valid Credentials",
+      "description": "Test login functionality with valid username/email and password.",
+      "type": "positive",
+      "layer": "unit",
+      "priority": "high",
+      "steps": [
+        "Enter valid username/email.",
+        "Enter valid password.",
+        "Click on login button."
+      ],
+      "expected_result": "User is logged in successfully."
+    },
+    {
+      "id": "TC-002",
+      "title": "Login with Invalid Credentials",
+      "description": "Test login functionality with invalid username/email or password.",
+      "type": "negative",
+      "layer": "unit",
+      "priority": "high",
+      "steps": [
+        "Enter invalid username/email.",
+        "Enter invalid password.",
+        "Click on login button."
+      ],
+      "expected_result": "Error message is displayed."
+    },
+    {
+      "id": "TC-003",
+      "title": "Login with Empty Credentials",
+      "description": "Test login functionality with empty username/email and password fields.",
+      "type": "edge_case",
+      "layer": "unit",
+      "priority": "medium",
+      "steps": [
+        "Leave username/email field empty.",
+        "Leave password field empty.",
+        "Click on login button."
+      ],
+      "expected_result": "Error message is displayed."
+    },
+    {
+      "id": "TC-004",
+      "title": "Add Product to Shopping Cart",
+      "description": "Test adding a product to the shopping cart after logging in.",
+      "type": "positive",
+      "layer": "unit",
+      "priority": "high",
+      "steps": [
+        "Log in with valid credentials.",
+        "Browse store and select a product.",
+        "Add product to shopping cart."
+      ],
+      "expected_result": "Product is added to the shopping cart."
+    },
+    {
+      "id": "TC-005",
+      "title": "Proceed to Checkout with Empty Cart",
+      "description": "Test proceeding to checkout with an empty shopping cart.",
+      "type": "negative",
+      "layer": "unit",
+      "priority": "medium",
+      "steps": [
+        "Log in with valid credentials.",
+        "Ensure shopping cart is empty.",
+        "Attempt to proceed to checkout."
+      ],
+      "expected_result": "User is unable to proceed to checkout."
+    },
+    {
+      "id": "TC-006",
+      "title": "Checkout with Delivery Option",
+      "description": "Test checkout process with delivery option selected.",
+      "type": "positive",
+      "layer": "integration",
+      "priority": "high",
+      "steps": [
+        "Log in with valid credentials.",
+        "Add products to shopping cart.",
+        "Proceed to checkout.",
+        "Select delivery option.",
+        "Enter valid delivery address.",
+        "Confirm order."
+      ],
+      "expected_result": "Order is confirmed and saved with delivery option and address."
+    },
+    {
+      "id": "TC-007",
+      "title": "Checkout with Pickup Option",
+      "description": "Test checkout process with pickup option selected.",
+      "type": "positive",
+      "layer": "integration",
+      "priority": "high",
+      "steps": [
+        "Log in with valid credentials.",
+        "Add products to shopping cart.",
+        "Proceed to checkout.",
+        "Select pickup option.",
+        "Confirm order."
+      ],
+      "expected_result": "Order is confirmed and saved with pickup option."
+    },
+    {
+      "id": "TC-008",
+      "title": "Checkout without Selecting Fulfillment Option",
+      "description": "Test checkout process without selecting any fulfillment option.",
+      "type": "negative",
+      "layer": "integration",
+      "priority": "medium",
+      "steps": [
+        "Log in with valid credentials.",
+        "Add products to shopping cart.",
+        "Proceed to checkout.",
+        "Attempt to confirm order without selecting fulfillment option."
+      ],
+      "expected_result": "User is prompted to select a fulfillment option."
+    },
+    {
+      "id": "TC-009",
+      "title": "Order Confirmation without Payment",
+      "description": "Test that order is confirmed without processing payment at checkout.",
+      "type": "positive",
+      "layer": "e2e",
+      "priority": "high",
+      "steps": [
+        "Log in with valid credentials.",
+        "Add products to shopping cart.",
+        "Proceed to checkout.",
+        "Select any fulfillment option.",
+        "Confirm order."
+      ],
+      "expected_result": "Order is confirmed and saved without payment processing."
+    },
+    {
+      "id": "TC-010",
+      "title": "Invalid Delivery Address",
+      "description": "Test checkout process with invalid delivery address.",
+      "type": "negative",
+      "layer": "e2e",
+      "priority": "medium",
+      "steps": [
+        "Log in with valid credentials.",
+        "Add products to shopping cart.",
+        "Proceed to checkout.",
+        "Select delivery option.",
+        "Enter invalid delivery address.",
+        "Attempt to confirm order."
+      ],
+      "expected_result": "User is prompted to enter a valid delivery address."
+    }
+  ]
+}

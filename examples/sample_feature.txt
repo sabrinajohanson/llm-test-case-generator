@@ -1,0 +1,21 @@
+Feature: E-commerce User Journey (Login, Shopping, and Checkout)
+
+A user must be able to log in to the system using a username/email and password.
+If the credentials are invalid, the system should display an error message.
+
+Once logged in, the user can browse the store and add one or more products to
+a shopping cart.
+
+When the user proceeds to checkout, they must choose one of two fulfillment
+options:
+1. Delivery - the user provides a delivery address where the order will be sent.
+2. Pickup - the user will collect the order in person at the store's physical
+   location, so no address is required in this case.
+
+After the order is placed, no online payment is processed at checkout. Instead,
+the seller contacts the customer afterward (e.g., via message or email) and
+sends a payment link to complete the transaction separately.
+
+The order should be confirmed and saved in the system regardless of the
+fulfillment option chosen, with the correct fulfillment type (delivery or
+pickup) and, when applicable, the correct delivery address.
