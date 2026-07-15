@@ -68,6 +68,10 @@ Run the live test locally (requires a valid `OPENAI_API_KEY` in `.env`):
 pytest tests/live/ -v
 ```
 
+**Test reports:**
+- The mock CI publishes a full [Allure Report](https://sabrinajohanson.github.io/llm-test-case-generator/) on every push, showing the detailed results of the mocked test suite.
+- The live CI does not publish a public report, since it only runs on-demand. Its results (Allure report and a `results.json` summary) are available as downloadable artifacts on the corresponding [CI (live) run](https://github.com/sabrinajohanson/llm-test-case-generator/actions/workflows/ci-live.yml).
+
 ## Known Limitations
 
 - Test case classification (`unit` vs `integration`) is not 100% consistent across positive vs. negative/edge_case variants of similar scenarios.
