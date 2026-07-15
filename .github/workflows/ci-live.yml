@@ -22,4 +22,45 @@ jobs:
       - name: Run live tests (real OpenAI API calls)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: pytest tests/live/ -v
+        run: >
+          pytest tests/live/ -v
+          --alluredir=allure-results
+          --json-report --json-report-file=pytest-report.json
+
+      - name: Set up Java (required by Allure CLI)
+        if: always()
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install Allure commandline
+        if: always()
+        run: |
+          curl -sL -o allure.zip https://github.com/allure-framework/allure2/releases/download/2.39.0/allure-2.39.0.zip
+          unzip -qq allure.zip -d /opt/
+          echo "/opt/allure-2.39.0/bin" >> $GITHUB_PATH
+
+      - name: Generate Allure HTML report
+        if: always()
+        run: allure generate allure-results --clean -o allure-report
+
+      - name: Generate common results.json
+        if: always()
+        run: python scripts/generate_results_summary.py
+
+      - name: Upload Allure report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-live
+          path: allure-report/
+          retention-days: 30
+
+      - name: Upload results.json artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-json-live
+          path: results.json
+          retention-days: 30
