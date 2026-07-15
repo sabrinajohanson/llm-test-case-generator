@@ -3,6 +3,7 @@
 Generates structured test cases (unit, integration, and e2e) from a plain-text feature description, using the OpenAI API (GPT-4o).
 
 [![CI (mock)](https://github.com/sabrinajohanson/llm-test-case-generator/actions/workflows/ci-mock.yml/badge.svg)](https://github.com/sabrinajohanson/llm-test-case-generator/actions/workflows/ci-mock.yml)
+
 [![CI (live)](https://github.com/sabrinajohanson/llm-test-case-generator/actions/workflows/ci-live.yml/badge.svg)](https://github.com/sabrinajohanson/llm-test-case-generator/actions/workflows/ci-live.yml)
 
 ## Tech Stack
