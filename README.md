@@ -2,6 +2,9 @@
 
 Generates structured test cases (unit, integration, and e2e) from a plain-text feature description, using the OpenAI API (GPT-4o).
 
+[![CI (mock)](https://github.com/sabrinajohanson/llm-test-case-generator/actions/workflows/ci-mock.yml/badge.svg)](https://github.com/sabrinajohanson/llm-test-case-generator/actions/workflows/ci-mock.yml)
+[![CI (live)](https://github.com/sabrinajohanson/llm-test-case-generator/actions/workflows/ci-live.yml/badge.svg)](https://github.com/sabrinajohanson/llm-test-case-generator/actions/workflows/ci-live.yml)
+
 ## Tech Stack
 
 - Python
@@ -46,6 +49,23 @@ Following up on issue #2, it was observed that negative/edge_case tests involvin
 ## Example Output
 
 See [`examples/sample_output.json`](./examples/sample_output.json) for a real, unedited output generated from [`examples/sample_feature.txt`](./examples/sample_feature.txt).
+
+## Testing
+
+This project uses a two-tier testing strategy to balance thorough validation with API cost control:
+
+- **Mock tests** (`tests/`): Unit tests that mock the OpenAI API call, validating the prompt-building logic, file reading, and JSON parsing (including the error path for malformed responses). These run automatically on every push via GitHub Actions, at no cost.
+- **Live contract test** (`tests/live/`): A test that calls the real OpenAI API and validates the structural contract of the response (required fields, allowed values for `type` and `layer`), without asserting on exact content, since the model's output naturally varies. This runs only when manually triggered via GitHub Actions (`workflow_dispatch`), to control token spend.
+
+Run mock tests locally:
+```bash
+pytest tests/ -v --ignore=tests/live
+```
+
+Run the live test locally (requires a valid `OPENAI_API_KEY` in `.env`):
+```bash
+pytest tests/live/ -v
+```
 
 ## Known Limitations
 
