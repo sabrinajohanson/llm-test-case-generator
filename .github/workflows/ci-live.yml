@@ -64,3 +64,9 @@ jobs:
           name: results-json-live
           path: results.json
           retention-days: 30
+
+      - name: Send Teams notification
+        if: always()
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: python scripts/send_teams_notification.py
