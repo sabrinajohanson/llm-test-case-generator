@@ -13,9 +13,14 @@ def extract_failures(report):
     for test in report.get("tests", []):
         if test.get("outcome") == "failed":
             call = test.get("call", {})
-            message = call.get("longrepr", "") or test.get("longrepr", "")
-            if isinstance(message, dict):
-                message = message.get("reprcrash", {}).get("message", str(message))
+            crash = call.get("crash", {})
+            message = crash.get("message")
+
+            if not message:
+                message = call.get("longrepr", "") or test.get("longrepr", "")
+                if isinstance(message, dict):
+                    message = message.get("reprcrash", {}).get("message", str(message))
+
             failures.append({
                 "name": test.get("nodeid", "unknown"),
                 "error_message": str(message)[:300],
